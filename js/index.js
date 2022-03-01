@@ -88,6 +88,8 @@ const displayPhoneDetails = (phone) => {
 
 //Searching for Phone Details
 const searchPhoneDetails = async (phoneId) => {
+  //Scrolling To the Top of the page
+  window.scrollTo(0, 0)
   //Showing Spinner and Hiding any Previous Details
   showElement('spinner')
   !document.getElementById('phone-details').classList.contains('hidden') &&
