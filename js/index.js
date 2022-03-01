@@ -14,6 +14,13 @@ const showOrHideElement = (elementId) => {
     : element.classList.add('hidden')
 }
 
+const showElement = (elementId) => {
+  document.getElementById(elementId).classList.remove('hidden')
+}
+const hideElement = (elementId) => {
+  document.getElementById(elementId).classList.add('hidden')
+}
+
 //getting Dynamic url from parameters
 const getfetchUrl = (searchId, search = false) => {
   const baseUrl = 'https://openapi.programming-hero.com/api/phone'
@@ -71,14 +78,14 @@ const displayPhoneDetails = (phone) => {
     : (othersContainer.innerHTML = `
         <h3>Others: <span class='font-bold'>${NO_INFO_FOUND}</span></h3>
     `)
-  showOrHideElement('spinner')
-  document.getElementById('phone-details').classList.remove('hidden')
+  hideElement('spinner')
+  showElement('phone-details')
 }
 
 const searchPhoneDetails = async (phoneId) => {
-  showOrHideElement('spinner')
+  showElement('spinner')
   !document.getElementById('phone-details').classList.contains('hidden') &&
-    showOrHideElement('phone-details')
+    hideElement('phone-details')
   const fetchUrl = getfetchUrl(phoneId)
   const phoneDetails = await fetchPhoneInfo(fetchUrl)
   displayPhoneDetails(phoneDetails)
@@ -111,17 +118,28 @@ const displayPhoneInfo = (phones, showAll = false) => {
         `
     cardContainer.appendChild(div)
   })
+  hideElement('spinner-result')
+  showElement('search-result-container')
   !showAll && phones.length > 20
-    ? document.getElementById('show-all-btn').classList.remove('hidden')
-    : document.getElementById('show-all-btn').classList.add('hidden')
+    ? showElement('show-all-btn')
+    : hideElement('show-all-btn')
 }
 
 const searchPhone = async () => {
   const searchText = getSearchText('search-field')
   if (searchText === -1) {
-    //display error message
+    document.getElementById(
+      'error-message'
+    ).innerText = `"Please Enter a Phone Name First"`
     return
   }
+  document.getElementById('error-message').innerText = ''
+  showElement('spinner-result')
+  !document
+    .getElementById('search-result-container')
+    .classList.contains('hidden') && hideElement('search-result-container')
+  !document.getElementById('phone-details').classList.contains('hidden') &&
+    hideElement('phone-details')
   const fetchUrl = getfetchUrl(searchText?.toLowerCase(), true)
   phonesInfo = await fetchPhoneInfo(fetchUrl)
   const heading = document.getElementById('search-result-header')

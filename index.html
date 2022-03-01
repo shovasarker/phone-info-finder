@@ -25,14 +25,15 @@
         <!-- Main Section Start -->
         <main class="container px-6 md:px-10 lg:px-16 xl:px-20">
             <!-- Search Section Start -->
-            <section>
+            <section class=" mb-16">
                 <div
-                    class="w-full md:w-3/5 lg:w-1/2 flex justify-start items-center mx-auto rounded-md shadow-md text-lg overflow-hidden mb-16">
-                    <input id="search-field" type="text" placeholder="Enter a Phone Brand Name"
+                    class="w-full md:w-3/5 lg:w-1/2 flex justify-start items-center mx-auto rounded-md shadow-md text-lg overflow-hidden">
+                    <input id="search-field" type="text" placeholder="Enter a Phone Name"
                         class="px-3 py-2 text-gray-700 bg-green-50 shadow-xl rounded-md focus:outline-none flex-grow">
                     <button onclick="searchPhone()"
                         class="custom-btn !rounded-l-none !py-2 !mt-0 !text-lg">Search</button>
                 </div>
+                <h1 id="error-message" class="text-sm font-medium text-red-400 text-center mt-2"></h1>
             </section>
             <!-- Search Section End -->
 
@@ -40,7 +41,7 @@
             <!-- Phone Details Section Start -->
             <div id="spinner" class="spinner hidden"></div>
             <section id="phone-details" class="hidden">
-                <div class="flex flex-col lg:flex-row justify-start items-start gap-8 ">
+                <div class="flex flex-col lg:flex-row justify-start items-start gap-8 bg-white px-5 py-4">
                     <div class="w-full md:w-3/5 lg:w-2/6">
                         <img id="phone-image" src="" alt="" class="w-full object-contain">
                     </div>
@@ -65,14 +66,19 @@
             <!-- Phone Details Section End -->
 
             <!-- Phone Search results Section Start -->
-            <section id="search-result-container" class=" my-12 flex flex-col items-center justify-start gap-16">
-                <h1 id="search-result-header" class="text-2xl font-bold text-gray-700"></h1>
-                <div id="card-container"
-                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 flex-grow">
+            <div id="spinner-result" class="spinner hidden"></div>
+            <section id="search-result-container" class="hidden my-12 ">
+                <div class="flex flex-col items-center justify-start gap-8">
 
+                    <h1 id="search-result-header" class="text-2xl font-bold text-gray-700 text-center"></h1>
+                    <div id="card-container"
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 flex-grow">
+
+                    </div>
+                    <button id="show-all-btn" onclick="showAllSearchResults()"
+                        class="custom-btn ml-auto hidden !mt-12">Show
+                        All</button>
                 </div>
-                <button id="show-all-btn" onclick="showAllSearchResults()" class="custom-btn ml-auto hidden">Show
-                    All</button>
             </section>
             <!-- Phone Search results Section End -->
         </main>
