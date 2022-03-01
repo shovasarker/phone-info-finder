@@ -7,6 +7,13 @@ const getSearchText = (searchFieldId) => {
   return searchText ? searchText : -1
 }
 
+const showOrHideElement = (elementId) => {
+  const element = document.getElementById(elementId)
+  element.classList.contains('hidden')
+    ? element.classList.remove('hidden')
+    : element.classList.add('hidden')
+}
+
 //getting Dynamic url from parameters
 const getfetchUrl = (searchId, search = false) => {
   const baseUrl = 'https://openapi.programming-hero.com/api/phone'
@@ -24,9 +31,57 @@ const fetchPhoneInfo = async (fetchUrl) => {
   }
 }
 
-const searchPhoneDetails = (phoneId) => {
+const displayPhoneDetails = (phone) => {
+  const { name, brand, image, releaseDate, mainFeatures, others } = phone
+  const { chipSet, displaySize, memory, sensors, storage } = mainFeatures
+  const NO_INFO_FOUND = 'No Info Found'
+
+  document.getElementById('phone-image').src = image
+  document.getElementById('phone-name').innerText = name
+  document.getElementById('release-date').innerText = releaseDate
+    ? releaseDate
+    : NO_INFO_FOUND
+  document.getElementById('brand').innerText = brand ? brand : NO_INFO_FOUND
+  document.getElementById('chipset').innerText = chipSet
+    ? chipSet
+    : NO_INFO_FOUND
+  document.getElementById('display-size').innerText = displaySize
+    ? displaySize
+    : NO_INFO_FOUND
+  document.getElementById('memory').innerText = memory ? memory : NO_INFO_FOUND
+  document.getElementById('storage').innerText = storage
+    ? storage
+    : NO_INFO_FOUND
+  document.getElementById('sensors').innerText =
+    sensors?.length > 0 ? sensors?.join(', ') : NO_INFO_FOUND
+  const othersContainer = document.getElementById('others')
+  othersContainer.innerHTML = `
+    <span class="font-bold">Others:</span>
+  `
+  others
+    ? Object.entries(others).forEach(([key, value]) => {
+        const h3 = document.createElement('h3')
+        h3.innerHTML = `
+            ${key}: <span class='font-bold'>${
+          value ? value : NO_INFO_FOUND
+        }</span>
+        `
+        othersContainer.appendChild(h3)
+      })
+    : (othersContainer.innerHTML = `
+        <h3>Others: <span class='font-bold'>${NO_INFO_FOUND}</span></h3>
+    `)
+  showOrHideElement('spinner')
+  document.getElementById('phone-details').classList.remove('hidden')
+}
+
+const searchPhoneDetails = async (phoneId) => {
+  showOrHideElement('spinner')
+  !document.getElementById('phone-details').classList.contains('hidden') &&
+    showOrHideElement('phone-details')
   const fetchUrl = getfetchUrl(phoneId)
-  console.log(fetchUrl)
+  const phoneDetails = await fetchPhoneInfo(fetchUrl)
+  displayPhoneDetails(phoneDetails)
 }
 
 // const removeChilds = (container) => {
