@@ -45,6 +45,7 @@ const displayPhoneDetails = (phone) => {
   const NO_INFO_FOUND = 'No Info Found'
 
   //Displaying information to the dom
+  document.getElementById('phone-details-header').innerText = `${name} Details`
   document.getElementById('phone-image').src = image
   document.getElementById('phone-name').innerText = name
   document.getElementById('release-date').innerText = releaseDate
@@ -114,13 +115,19 @@ const displayPhoneInfo = (phones, showAll = false) => {
     const { brand, image, phone_name, slug } = phone
     const div = document.createElement('div')
     div.classList.add('card')
+    //an arrow right svg is added to the button
     div.innerHTML = `
             <div class='card__img-container'>
                 <img src="${image}" alt='Picture of ${phone_name}' />
             </div>
             <h2 class='card__title'>${phone_name}</h2>
             <h4 class='card__brand-name'>${brand}</h4>
-            <button class='custom-btn' onclick="searchPhoneDetails('${slug}')">View Details</button>
+            <button class='custom-btn' onclick="searchPhoneDetails('${slug}')">
+            View Details
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-3 h-3 inline-block ml-1 mb-0.5 fill-white ">
+            <path d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 .0016 273.7 .0016 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z"/>
+            </svg>
+            </button>
         `
     cardContainer.appendChild(div)
   })
