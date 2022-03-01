@@ -31,7 +31,7 @@
                     <input id="search-field" type="text" placeholder="Enter a Phone Name"
                         class="px-3 py-2 text-gray-700 bg-green-50 shadow-xl rounded-md focus:outline-none flex-grow">
                     <button onclick="searchPhone()"
-                        class="custom-btn !rounded-l-none !py-2 !mt-0 !text-lg">Search</button>
+                        class="custom-btn !rounded-l-none !py-2 !mt-0 !text-lg flex-shrink-0">Search</button>
                 </div>
                 <h1 id="error-message" class="text-sm font-medium text-red-400 text-center mt-2"></h1>
             </section>
@@ -70,7 +70,7 @@
             <section id="search-result-container" class="hidden my-12 ">
                 <div class="flex flex-col items-center justify-start gap-8">
 
-                    <h1 id="search-result-header" class="text-2xl font-bold text-gray-700 text-center"></h1>
+                    <h1 id="search-result-header" class="text-xl md:text-2xl font-bold text-gray-700 text-center"></h1>
                     <div id="card-container"
                         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 flex-grow">
 
