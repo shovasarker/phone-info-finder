@@ -171,3 +171,7 @@ const searchPhone = async () => {
 const showAllSearchResults = () => {
   displayPhoneInfo(phonesInfo, true)
 }
+//function for hiding phone details
+const hidePhoneDetails = () => {
+  hideElement('phone-details')
+}

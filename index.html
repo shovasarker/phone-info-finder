@@ -31,7 +31,7 @@
                     <input id="search-field" type="text" placeholder="Enter a Phone Name"
                         class="px-3 py-2 text-gray-700 bg-green-50 shadow-xl rounded-md focus:outline-none flex-grow">
                     <button onclick="searchPhone()"
-                        class="custom-btn !rounded-l-none !py-2 !mt-0 !text-lg flex-shrink-0">Search</button>
+                        class="custom-btn !rounded-l-none !py-2 !mt-0 !text-lg !px-2 md:px-3">Search</button>
                 </div>
                 <h1 id="error-message" class="text-sm font-medium text-red-400 text-center mt-2"></h1>
             </section>
@@ -60,6 +60,8 @@
                         <h3 class="font-normal">Sensors : <span id="sensors" class="font-bold"></span></h3>
                         <div id="others" class="flex flex-col justify-start items-start gap-2 font-normal">
                         </div>
+                        <button onclick="hidePhoneDetails()"
+                            class="px-3 py-1.5 text-sm text-white font-semibold bg-red-500 border border-red-500 rounded-md shadow-lg hover:text-red-500 hover:bg-transparent hover:shadow-xl transition-all duration-300 cursor-pointer">Close</button>
                     </div>
                 </div>
             </section>
