@@ -4,7 +4,7 @@
 
 @layer components {
   .card {
-    @apply px-4 py-6 bg-white rounded-xl shadow-xl flex flex-col items-start justify-start gap-3;
+    @apply w-64 lg:w-full px-4 py-6 bg-white rounded-xl shadow-xl flex flex-col items-start justify-start gap-3;
   }
 
   .card__img-container {
@@ -20,7 +20,7 @@
   }
 
   .card__brand-name {
-    @apply text-lg font-semibold text-gray-700;
+    @apply text-lg font-semibold text-gray-700 !-mt-2 !mb-4;
   }
 
   .custom-btn {

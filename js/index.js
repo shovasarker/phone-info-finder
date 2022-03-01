@@ -1,9 +1,9 @@
-let showAll = false
 let phonesInfo = []
 
 const getSearchText = (searchFieldId) => {
   const searchField = document.getElementById(searchFieldId)
   const searchText = searchField.value
+  searchField.value = ''
   return searchText ? searchText : -1
 }
 
@@ -29,11 +29,15 @@ const searchPhoneDetails = (phoneId) => {
   console.log(fetchUrl)
 }
 
-const displayPhoneInfo = (phones) => {
+// const removeChilds = (container) => {
+//   console.log(container.childNodes)
+//   container?.childNodes?.forEach((child) => container?.removeChild(child))
+// }
+
+const displayPhoneInfo = (phones, showAll = false) => {
   const cardContainer = document.getElementById('card-container')
-  cardContainer?.childNodes?.forEach((child) =>
-    cardContainer?.removeChild(child)
-  )
+  //   removeChilds(cardContainer)
+  cardContainer.textContent = ''
   let filteredPhones = []
   filteredPhones = showAll ? phones : phones?.filter((phone, i) => i < 20)
   console.log(phones)
@@ -52,6 +56,9 @@ const displayPhoneInfo = (phones) => {
         `
     cardContainer.appendChild(div)
   })
+  !showAll && phones.length > 20
+    ? document.getElementById('show-all-btn').classList.remove('hidden')
+    : document.getElementById('show-all-btn').classList.add('hidden')
 }
 
 const searchPhone = async () => {
@@ -60,7 +67,16 @@ const searchPhone = async () => {
     //display error message
     return
   }
-  const fetchUrl = getfetchUrl(searchText, true)
+  const fetchUrl = getfetchUrl(searchText?.toLowerCase(), true)
   phonesInfo = await fetchPhoneInfo(fetchUrl)
+  const heading = document.getElementById('search-result-header')
+  phonesInfo.length > 0
+    ? (heading.innerText = `Search Result For "${searchText}"`)
+    : (heading.innerText = `No Result Found For "${searchText}"`)
+
   displayPhoneInfo(phonesInfo)
+}
+
+const showAllSearchResults = () => {
+  displayPhoneInfo(phonesInfo, true)
 }
